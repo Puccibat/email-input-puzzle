@@ -6,13 +6,20 @@ import emailList from './provider.json';
 function App() {
   const [query, setQuery] = useState('');
   const [filteredEmails, setFilteredEmails] = useState([]);
+  const [emailProvider, setEmailProvider] = useState('');
+
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    const emailValue = e.target.value;
+    setEmailProvider(emailValue);
+    if (emailValue.includes('@')) {
+      const queryFiltered = emailValue.split('@')[1];
+      setQuery(queryFiltered);
+    }
   };
 
   useEffect(() => {
     setFilteredEmails(
-      emailList.filter((email) => email.includes(query)).slice(0, 3)
+      emailList.filter((email) => email.startsWith(query)).slice(0, 3)
     );
   }, [query]);
 
