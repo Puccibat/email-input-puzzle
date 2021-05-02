@@ -12,12 +12,12 @@ function App() {
   const inputFocus = document.querySelector('input');
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    setInputValue(e.target.value);
-    console.log(inputValue);
-    setEmailProvider(inputValue);
-    if (inputValue.includes('@')) {
-      const queryFiltered = inputValue.split('@')[1];
+    const input = e.target.value;
+    setInputValue(input);
+    setEmailProvider(input);
+
+    if (input.includes('@')) {
+      const queryFiltered = input.split('@')[1];
       setQuery(queryFiltered);
     }
   };
@@ -26,6 +26,8 @@ function App() {
     const beforeAt = emailProvider.split('@')[0];
     const inputComplete = beforeAt + e.target.innerText;
     setInputValue(inputComplete);
+    setFilteredEmails([]);
+
     inputFocus.focus();
   };
 
