@@ -7,14 +7,26 @@ function App() {
   const [query, setQuery] = useState('');
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [emailProvider, setEmailProvider] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+  const inputFocus = document.querySelector('input');
 
   const handleChange = (e) => {
-    const emailValue = e.target.value;
-    setEmailProvider(emailValue);
-    if (emailValue.includes('@')) {
-      const queryFiltered = emailValue.split('@')[1];
+    console.log(e.target.value);
+    setInputValue(e.target.value);
+    console.log(inputValue);
+    setEmailProvider(inputValue);
+    if (inputValue.includes('@')) {
+      const queryFiltered = inputValue.split('@')[1];
       setQuery(queryFiltered);
     }
+  };
+
+  const addToInput = (e) => {
+    const beforeAt = emailProvider.split('@')[0];
+    const inputComplete = beforeAt + e.target.innerText;
+    setInputValue(inputComplete);
+    inputFocus.focus();
   };
 
   useEffect(() => {
@@ -25,8 +37,8 @@ function App() {
 
   return (
     <div className='App'>
-      <InputEmail handleChange={handleChange} />
-      <EmailDisplayed filteredEmails={filteredEmails} />
+      <InputEmail handleChange={handleChange} inputValue={inputValue} />
+      <EmailDisplayed filteredEmails={filteredEmails} addToInput={addToInput} />
     </div>
   );
 }

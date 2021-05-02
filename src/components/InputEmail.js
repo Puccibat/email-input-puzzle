@@ -1,9 +1,14 @@
 import React from 'react';
 
-const InputEmail = ({ handleChange }) => {
+const InputEmail = ({ handleChange, inputValue }) => {
   return (
     <div>
-      <input type='text' placeholder='Adresse email' onChange={handleChange} />
+      <input
+        type='text'
+        value={inputValue}
+        placeholder='Adresse email'
+        onChange={handleChange}
+      />
     </div>
   );
 };
